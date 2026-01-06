@@ -17,9 +17,7 @@ import requests
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from urllib.parse import quote
-from dotenv import load_dotenv
 
-load_dotenv()
 
 # ============== CONFIGURATION ==============
 
