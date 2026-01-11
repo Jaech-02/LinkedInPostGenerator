@@ -2,21 +2,31 @@
 
 Automatically generates and posts trending Android content to your LinkedIn profile.
 
+## 📖 Full Technical Article
+
+Want to understand how this works in depth?
+
+**Read the complete tutorial:**
+- 📝 [Medium](https://medium.com/@sjasmeet438/i-built-an-ai-bot-that-writes-and-posts-to-linkedin-while-i-sleep-heres-how-322ed568e4b9) - Original detailed writeup
+- 💻 [Dev.to](https://dev.to/jasmeet_singh_4c2c880bacd/i-built-an-ai-bot-that-writes-and-posts-to-linkedin-while-i-sleep-heres-how-107g) - Developer community version
+
+**What's covered:**
+- Complete architecture and design decisions
+- Step-by-step API integration (DuckDuckGo, Groq, LinkedIn)
+- Prompt engineering techniques
+- GitHub Actions automation setup
+- Challenges faced and solutions
+- Ethics of automation
+
+---
+
 ## 🔄 How It Works
 
-```
-┌─────────────────────────┐
-│  1. DuckDuckGo Search   │  → Find 5 trending Android topics
-└───────────┬─────────────┘
-            ↓
-┌─────────────────────────┐
-│  2. Groq AI (LLaMA 70B) │  → Pick best topic + Generate post
-└───────────┬─────────────┘
-            ↓
-┌─────────────────────────┐
-│  3. LinkedIn API        │  → Post to your profile
-└─────────────────────────┘
-```
+<p align="start">
+  <img src="https://github.com/user-attachments/assets/54a0855c-c816-4cff-a781-5b453322ee6b"
+       width="350" />
+</p>
+
 
 ## 📋 Prerequisites
 
@@ -29,9 +39,6 @@ Automatically generates and posts trending Android content to your LinkedIn prof
 ```bash
 # Install dependencies
 pip install -r requirements.txt
-
-# Get access token
-python token_gen.py
 
 # Test without posting (dry run)
 python linkedin_ai_poster.py --dry-run
@@ -65,7 +72,7 @@ name: Weekly LinkedIn Post
 
 on:
   schedule:
-    - cron: '0 9 * * 1'  # Every Monday 9 AM UTC
+    - cron: '0 3 * * 3'  # Every Wednesday 8:30 AM IST
   workflow_dispatch:  # Manual trigger
 
 jobs:
@@ -107,13 +114,14 @@ This will:
 - Show preview ✅
 - NOT post to LinkedIn ❌
 
-## 📁 Files
+## 📁 Project Structure
 
 ```
 linkedin_ai_poster/
 ├── linkedin_ai_poster.py   # Main script
 ├── linkedin_tokens.json    # LinkedIn auth tokens
 ├── post_history.json       # History of posted content
+├── post_history.json       # Genrating initial token
 ├── requirements.txt        # Dependencies
 └── README.md              # This file
 ```
@@ -121,13 +129,12 @@ linkedin_ai_poster/
 ## 🎯 Customizing the Prompt
 
 The `SYSTEM_PROMPT` in the script defines your LinkedIn persona. Customize it for your niche:
-
 - Change expertise areas
 - Update your background
 - Modify tone and style
 - Add/remove hashtags
 
-## ⚠️ Notes
+## ⚠️ Important Notes
 
 - LinkedIn tokens expire in ~60 days
 - Don't post too frequently (1-2x per week is ideal)
@@ -136,14 +143,28 @@ The `SYSTEM_PROMPT` in the script defines your LinkedIn persona. Customize it fo
 
 ## 🐛 Troubleshooting
 
-**"No LinkedIn tokens found"**
+**"No LinkedIn tokens found"**  
 → Run `token_gen.py` first to authenticate
 
-**"Groq API error"**
+**"Groq API error"**  
 → Check your API key is valid
 
-**"Search error"**
+**"Search error"**  
 → DuckDuckGo might be rate-limited, try again later
+
+## 📚 Learn More
+
+For a deep dive into how this system was built, check out the full articles:
+- [Medium Article](https://medium.com/@sjasmeet438/i-built-an-ai-bot-that-writes-and-posts-to-linkedin-while-i-sleep-heres-how-322ed568e4b9)
+- [Dev.to Article](https://dev.to/jasmeet_singh_4c2c880bacd/i-built-an-ai-bot-that-writes-and-posts-to-linkedin-while-i-sleep-heres-how-107g)
+
+## 🤝 Contributing
+
+Found a bug? Have an improvement? PRs welcome!
+
+## 📄 License
+
+MIT License - feel free to use this for your own projects!
 
 ---
 
