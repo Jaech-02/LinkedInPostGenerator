@@ -20,7 +20,7 @@ Automatically generates and posts trending Android content to your LinkedIn prof
 
 ## 📋 Prerequisites
 
-1. **LinkedIn tokens** - Run `linkedin_post.py` first to authenticate
+1. **LinkedIn tokens** - Run `token_gen.py` first to authenticate
 2. **Groq API key** - Free at https://console.groq.com
 3. **Python 3.8+**
 
