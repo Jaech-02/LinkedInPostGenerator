@@ -134,7 +134,7 @@ The `SYSTEM_PROMPT` in the script defines your LinkedIn persona. Customize it fo
 ## 🐛 Troubleshooting
 
 **"No LinkedIn tokens found"**
-→ Run `linkedin_post.py` first to authenticate
+→ Run `token_gen.py` first to authenticate
 
 **"Groq API error"**
 → Check your API key is valid
