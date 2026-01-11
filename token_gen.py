@@ -18,11 +18,14 @@ import webbrowser
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 import json
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ============== CONFIGURATION ==============
 # Replace these with your LinkedIn App credentials
-CLIENT_ID = os.getenv("LINKEDIN_CLIENT_ID", "YOUR_CLIENT_ID_HERE")
-CLIENT_SECRET = os.getenv("LINKEDIN_CLIENT_SECRET", "YOUR_CLIENT_SECRET_HERE")
+CLIENT_ID = os.getenv("LINKEDIN_CLIENT_ID")
+CLIENT_SECRET = os.getenv("LINKEDIN_CLIENT_SECRET")
 REDIRECT_URI = "http://localhost:8000/callback"
 
 # Scopes needed for posting
@@ -214,17 +217,26 @@ def authenticate() -> tuple[str, str]:
 
 if __name__ == "__main__":
     # Check if credentials are set
-    if CLIENT_ID == "YOUR_CLIENT_ID_HERE" or CLIENT_SECRET == "YOUR_CLIENT_SECRET_HERE":
-        print("\n❌ ERROR: Please set your LinkedIn credentials!")
-        print("\nOption 1: Set environment variables:")
-        print("   export LINKEDIN_CLIENT_ID='your_client_id'")
-        print("   export LINKEDIN_CLIENT_SECRET='your_client_secret'")
-        print("\nOption 2: Edit this file and replace:")
-        print("   CLIENT_ID = 'your_client_id'")
-        print("   CLIENT_SECRET = 'your_client_secret'")
+    if not CLIENT_ID or not CLIENT_SECRET:
+        print("\n❌ ERROR: LinkedIn credentials not found!")
+        print("\nAsegurate de tener un archivo .env con:")
+        print("   LINKEDIN_CLIENT_ID=tu_client_id")
+        print("   LINKEDIN_CLIENT_SECRET=tu_client_secret")
+        print("\nO configura las variables de entorno:")
+        print("   $env:LINKEDIN_CLIENT_ID='tu_client_id'")
+        print("   $env:LINKEDIN_CLIENT_SECRET='tu_client_secret'")
     else:
         print("\n" + "=" * 60)
         print("🔵 LinkedIn Auth Flow")
+        print("=" * 60)
+        print(f"\n📋 Redirect URI configurado: {REDIRECT_URI}")
+        print("\n⚠️ IMPORTANTE: Asegurate de que esta URL exacta este registrada")
+        print("   en tu aplicacion de LinkedIn Developers:")
+        print("   1. Ve a https://developer.linkedin.com/")
+        print("   2. Abre tu aplicacion")
+        print("   3. Ve a la pestaña 'Auth'")
+        print(f"   4. En 'Redirect URLs' debe estar: {REDIRECT_URI}")
+        print("   5. Si no esta, agregala y guarda los cambios\n")
         print("=" * 60)
         access_token, person_urn = authenticate()
         print("\n" + "=" * 60)

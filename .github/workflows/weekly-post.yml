@@ -2,7 +2,8 @@ name: Weekly LinkedIn Post
 
 on:
   schedule:
-    - cron: '0 3 * * 3'
+    # Every Sunday at 8 PM Peru time (UTC-5) = 15:00 UTC (3 PM UTC)
+    - cron: '0 15 * * 0'
   workflow_dispatch:
 
 # 👇 YE ADD KARNA HAI
@@ -24,10 +25,12 @@ jobs:
       
       - name: 📦 Install dependencies
         run: |
-          pip install requests
+          pip install -r requirements.txt
       
       - name: 🤖 Run LinkedIn AI Poster
         env:
+          # Estos nombres deben coincidir con los secrets en GitHub
+          # Settings → Secrets and variables → Actions → New repository secret
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           LINKEDIN_PERSON_URN: ${{ secrets.LINKEDIN_PERSON_URN }}
