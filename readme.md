@@ -30,6 +30,9 @@ Automatically generates and posts trending Android content to your LinkedIn prof
 # Install dependencies
 pip install -r requirements.txt
 
+# Get access token
+python token_gen.py
+
 # Test without posting (dry run)
 python linkedin_ai_poster.py --dry-run
 
